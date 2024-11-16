@@ -33,8 +33,9 @@ export function FishProvider({ children }: { children: React.ReactNode }) {
     } else {
       setName(data.name)
       setDoa(new Date(data.doa))
-      setIsLoading(false)
     }
+
+    setIsLoading(false)
   }, [router])
 
   function createFish(values: FishData) {

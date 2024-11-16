@@ -23,10 +23,12 @@ export default function Home() {
               {name ? `Olá, ${name}!` : 'Bem-vindo ao Peixe Babel!'}
             </h1>
 
-            <p className="text-center text-muted-foreground">
-              Sua dashboard está sendo construída para ajudá-lo a gerenciar tudo
-              com facilidade e eficiência.
-            </p>
+            {name && (
+              <p className="text-center text-muted-foreground">
+                Sua dashboard está sendo construída para ajudá-lo a gerenciar
+                tudo com facilidade e eficiência.
+              </p>
+            )}
           </>
         ) : (
           <Skeleton className="h-6 w-full" />
