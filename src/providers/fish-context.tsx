@@ -29,7 +29,7 @@ export function FishProvider({ children }: { children: React.ReactNode }) {
     const data: FishData | null = getLocalStorage(fishDataLocalStorageKey)
 
     if (!data) {
-      router.push('/')
+      // router.push('/')
     } else {
       setName(data.name)
       setDoa(new Date(data.doa))
@@ -43,7 +43,7 @@ export function FishProvider({ children }: { children: React.ReactNode }) {
     setDoa(values.doa)
 
     setLocalStorage(fishDataLocalStorageKey, JSON.stringify(values))
-    router.push('/dashboard')
+    // router.push('/dashboard')
   }
 
   return (
