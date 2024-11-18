@@ -22,13 +22,11 @@ export default function RootLayout({
       <html lang="pt-BR" className="h-full">
         <body
           className={cn(
-            'flex h-full items-center justify-center bg-primary/20 px-2.5 antialiased',
+            'flex h-full items-center justify-center bg-primary/20 antialiased',
             plusJarkarta.className,
           )}
         >
-          <div className="w-full max-w-md space-y-6 rounded-md bg-background p-4 shadow md:p-8">
-            {children}
-          </div>
+          <div className="w-full">{children}</div>
         </body>
       </html>
     </Providers>
