@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
-import './globals.css'
-import { Plus_Jakarta_Sans as PlusJarkartaSans } from 'next/font/google'
-import { cn } from '@/lib/utils'
 import { siteConfig } from '@/config'
-import { FishProvider } from '@/providers/fish-context'
+import { cn } from '@/lib/utils'
+import { Providers } from '@/providers'
+import type { Metadata } from 'next'
+import { Plus_Jakarta_Sans as PlusJarkartaSans } from 'next/font/google'
+import './globals.css'
 
 export const metadata: Metadata = {
   title: siteConfig.name,
@@ -18,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" className="h-full">
-      <FishProvider>
+    <Providers>
+      <html lang="pt-BR" className="h-full">
         <body
           className={cn(
             'flex h-full items-center justify-center bg-primary/20 px-2.5 antialiased',
@@ -30,7 +30,7 @@ export default function RootLayout({
             {children}
           </div>
         </body>
-      </FishProvider>
-    </html>
+      </html>
+    </Providers>
   )
 }
