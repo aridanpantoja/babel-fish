@@ -27,10 +27,7 @@ export default function SignUpPage() {
 
         <AuthSeparator />
 
-        <div className="w-full space-y-3">
-          <ClerkConnection connection="google" label="Criar com Google" />
-          <ClerkConnection connection="github" label="Criar com Github" />
-        </div>
+        <ClerkConnection connection="github" label="Criar com Github" />
 
         <p className="text-center text-sm text-muted-foreground">
           Já possui uma conta?{' '}

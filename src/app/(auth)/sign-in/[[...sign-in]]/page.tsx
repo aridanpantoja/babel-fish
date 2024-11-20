@@ -20,10 +20,9 @@ export default function SignInPage() {
         <ClerkField label="Usuário ou email" name="identifier" />
         <SignInStep.Submit />
         <AuthSeparator />
-        <div className="w-full space-y-3">
-          <ClerkConnection connection="github" label="Entrar com Github" />
-          <ClerkConnection connection="google" label="Entrar com Google" />
-        </div>
+
+        <ClerkConnection connection="github" label="Entrar com Github" />
+
         <p className="text-center text-sm text-muted-foreground">
           Sem conta?{' '}
           <ClerkLink navigate="sign-up" className="ml-0.5">
