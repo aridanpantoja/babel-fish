@@ -12,6 +12,7 @@
     "@clerk/elements": "^0.19.3",
     "@clerk/nextjs": "^6.3.4",
     "@hookform/resolvers": "^3.9.1",
+    "@radix-ui/react-avatar": "^1.1.1",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-popover": "^1.1.2",
     "@radix-ui/react-separator": "^1.1.0",
