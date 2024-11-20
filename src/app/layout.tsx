@@ -22,7 +22,7 @@ export default function RootLayout({
       <html lang="pt-BR" className="h-full">
         <body
           className={cn(
-            'flex h-full items-center justify-center bg-primary/20 antialiased',
+            'flex h-full items-center justify-center bg-background antialiased',
             plusJarkarta.className,
           )}
         >
