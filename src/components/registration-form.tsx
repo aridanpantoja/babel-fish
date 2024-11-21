@@ -17,15 +17,12 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { cn, formatDate } from '@/lib/utils'
-import { useFish } from '@/providers/fish-context'
 import { formData, formSchema } from '@/schemas/register-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CalendarIcon } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 
 export function RegistrationForm() {
-  const { createFish } = useFish()
-
   const form = useForm<formData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,7 +35,7 @@ export function RegistrationForm() {
       ...values,
     }
 
-    createFish(newFish)
+    console.log(newFish)
   }
 
   return (
