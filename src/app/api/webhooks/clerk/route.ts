@@ -1,6 +1,8 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
+import { User } from '@prisma/client'
+import { createUser, deleteUser, updateUser } from '@/actions/users'
 
 export async function POST(req: Request) {
   const SIGNING_SECRET = process.env.SIGNING_SECRET
@@ -44,34 +46,80 @@ export async function POST(req: Request) {
 
   const eventType = evt.type
 
-  if (eventType === 'user.created') {
-    const { id, email_addresses, first_name, last_name, image_url } = evt.data
+  switch (eventType) {
+    case 'user.created':
+      try {
+        const { id, email_addresses, first_name, last_name, image_url } =
+          evt.data
 
-    if (!id || !email_addresses) {
-      return new Response('Error occurred -- missing data', {
-        status: 400,
-      })
-    }
+        if (!id || !email_addresses) {
+          return new Response('Error occurred -- missing data', {
+            status: 400,
+          })
+        }
 
-    const user = {
-      clerkUserId: id,
-      email: email_addresses[0].email_address,
-      ...(first_name ? { firstName: first_name } : {}),
-      ...(last_name ? { lastName: last_name } : {}),
-      ...(image_url ? { imageUrl: image_url } : {}),
-    }
-    // TODO: await createUser(user as User)
+        const user = {
+          clerkUserId: id,
+          email: email_addresses[0].email_address,
+          ...(first_name ? { firstName: first_name } : {}),
+          ...(last_name ? { lastName: last_name } : {}),
+          ...(image_url ? { imageUrl: image_url } : {}),
+        }
 
-    return new Response(`Usuário criado com sucesso: ${user}`, {
-      status: 200,
-    })
-  }
+        await createUser(user as User)
 
-  if (eventType === 'user.deleted') {
-    return new Response('Usuário deletado com sucesso', { status: 200 })
-  }
+        return new Response('Usuário criado com sucesso!', {
+          status: 200,
+        })
+      } catch (error) {
+        return new Response(`Error occurred -- user.created -- ${error}`, {
+          status: 400,
+        })
+      }
+    case 'user.deleted':
+      try {
+        const { id } = evt.data
 
-  if (eventType === 'user.updated') {
-    return new Response('Usuário atualizado com sucesso', { status: 200 })
+        if (!id) {
+          return new Response('Error occurred -- missing data', {
+            status: 400,
+          })
+        }
+
+        await deleteUser(id)
+
+        return new Response('Usuário deletado com sucesso', { status: 200 })
+      } catch (error) {
+        return new Response(`Error occurred -- user.deleted -- ${error}`, {
+          status: 400,
+        })
+      }
+    case 'user.updated':
+      try {
+        const { id, email_addresses, first_name, last_name, image_url } =
+          evt.data
+
+        if (!id || !email_addresses) {
+          return new Response('Error occurred -- missing data', {
+            status: 400,
+          })
+        }
+
+        const updatedUser = {
+          clerkUserId: id,
+          email: email_addresses[0].email_address,
+          ...(first_name ? { firstName: first_name } : {}),
+          ...(last_name ? { lastName: last_name } : {}),
+          ...(image_url ? { imageUrl: image_url } : {}),
+        }
+
+        await updateUser(id, updatedUser as User)
+
+        return new Response('Usuário atualizado com sucesso', { status: 200 })
+      } catch (error) {
+        return new Response(`Error occurred -- user.updated -- ${error}`, {
+          status: 400,
+        })
+      }
   }
 }
