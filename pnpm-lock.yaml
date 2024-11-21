@@ -11,6 +11,9 @@ importers:
       '@clerk/elements':
         specifier: ^0.19.3
         version: 0.19.3(@clerk/shared@2.14.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react-dom@18.3.1)(@types/react@18.3.12)(next@14.2.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@clerk/localizations':
+        specifier: ^3.6.4
+        version: 3.6.4
       '@clerk/nextjs':
         specifier: ^6.3.4
         version: 6.3.4(next@14.2.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -140,6 +143,10 @@ packages:
     peerDependenciesMeta:
       next:
         optional: true
+
+  '@clerk/localizations@3.6.4':
+    resolution: {integrity: sha512-mQCtStwNrs3HVVrmhu2qFqvtjKP4mYGKs0bUgzJE3dlO52XAMAJL4nYqlq6egVYKLa84TZHPQABodIXyUt1KMw==}
+    engines: {node: '>=18.17.0'}
 
   '@clerk/nextjs@6.3.4':
     resolution: {integrity: sha512-PWsoH8vFQ+pybUcKTEZUPiyzshFZPEF1KgIdaoYIG5Y2JESIptZI66x3QmuDILcFeQrSmnJ2gCX5gFkw7Q2yOg==}
@@ -2257,6 +2264,10 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
+
+  '@clerk/localizations@3.6.4':
+    dependencies:
+      '@clerk/types': 4.34.0
 
   '@clerk/nextjs@6.3.4(next@14.2.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:

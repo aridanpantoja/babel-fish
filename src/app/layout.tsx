@@ -26,7 +26,7 @@ export default function RootLayout({
             plusJarkarta.className,
           )}
         >
-          <div className="w-full">{children}</div>
+          <div className="h-full w-full">{children}</div>
         </body>
       </html>
     </Providers>
