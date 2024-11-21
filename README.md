@@ -19,6 +19,7 @@ NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your-publishable-key-here"
 CLERK_SECRET_KEY="your-clerk-secret-here"
 NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
 NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
+SIGNING_SECRET="your-webhook-secret-here"
 ```
 
 #### 3. Install required dependencies with pnpm
