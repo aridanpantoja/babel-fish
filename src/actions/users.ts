@@ -1,6 +1,7 @@
 'use server'
 
 import prisma from '@/lib/db'
+import { auth } from '@clerk/nextjs/server'
 import { User } from '@prisma/client'
 
 export async function createUser(data: User) {
@@ -32,5 +33,24 @@ export async function deleteUser(id: string) {
     return { user }
   } catch (error) {
     return { error }
+  }
+}
+
+export async function getCurrentUser(): Promise<User | null> {
+  try {
+    const { userId } = await auth()
+
+    if (!userId) return null
+
+    const user = await prisma.user.findUnique({
+      where: { clerkUserId: userId },
+    })
+
+    if (!user) return null
+
+    return user
+  } catch (error) {
+    console.log(error)
+    return null
   }
 }
