@@ -1,5 +1,6 @@
 'use client'
 
+import { createFish } from '@/actions/fish'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import {
@@ -19,6 +20,7 @@ import {
 import { cn, formatDate } from '@/lib/utils'
 import { formData, formSchema } from '@/schemas/register-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Fish } from '@prisma/client'
 import { CalendarIcon } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 
@@ -30,12 +32,13 @@ export function RegistrationForm() {
     },
   })
 
-  function onSubmit(values: formData) {
+  async function onSubmit(values: formData) {
     const newFish = {
-      ...values,
+      name: values.name,
+      birthdate: values.doa,
     }
 
-    console.log(newFish)
+    await createFish(newFish as Fish)
   }
 
   return (
