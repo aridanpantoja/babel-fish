@@ -12,13 +12,15 @@
 
 ### Getting Started
 
-#### 1. Create a `.env.local` file in the root directory and add your environment variables as follows:
+#### 1. Create a `.env` file in the root directory and add your environment variables as follows:
 
 ```env
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your-publishable-key-here"
 CLERK_SECRET_KEY="your-clerk-secret-here"
 NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
 NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
+DATABASE_URL="postgresql://docker:docker@localhost:5432/mydb?schema=public"
+SIGNING_SECRET="your-webhook-secret-here"
 ```
 
 #### 3. Install required dependencies with pnpm

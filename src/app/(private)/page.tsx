@@ -1,23 +1,39 @@
-'use client'
+import { getCurrentUser } from '@/actions/users'
+import { RegistrationForm } from '@/components/registration-form'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import prisma from '@/lib/db'
+import { formatDate } from '@/lib/utils'
 
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
-import { useUser } from '@clerk/nextjs'
+export default async function Home() {
+  const user = await getCurrentUser()
 
-export default function Home() {
-  const { isLoaded, isSignedIn, user } = useUser()
+  if (!user) return null
 
-  if (!isLoaded || !isSignedIn) {
-    return null
-  }
+  const fishs = await prisma.fish.findMany({
+    where: {
+      ownerId: user.id,
+    },
+  })
 
   return (
     <>
       <Avatar className="size-32">
         <AvatarFallback>AR</AvatarFallback>
-        <AvatarImage src={user.imageUrl} />
+        <AvatarImage src={user.imageUrl || ''} />
       </Avatar>
 
-      <h1>Olá, {user.firstName}</h1>
+      <h1>{user.email}</h1>
+
+      <div className="">
+        <RegistrationForm />
+
+        {fishs.map((fish) => (
+          <div key={fish.id}>
+            <h2>{fish.name}</h2>
+            <p>{formatDate(fish.birthdate)}</p>
+          </div>
+        ))}
+      </div>
     </>
   )
 }
